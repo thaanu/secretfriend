@@ -2,9 +2,10 @@ import axios from "axios";
 const baseURL = import.meta.env.VITE_API_BASE_URL;
 const secretKey = import.meta.env.VITE_SECRET_KEY;
 const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Content-Type': 'application/json',
     'Authorization': `Bearer ${secretKey}`,
-    'Notion-Version': '2022-02-22',
-    'Content-Type': 'application/json'
+    'Notion-Version': '2022-02-22'
 };
 
 function changeHeaderAttribute( key, value ) {
@@ -12,14 +13,8 @@ function changeHeaderAttribute( key, value ) {
 }
 
 async function sendPost( url, data = {} ) {
-    // return await axios.post( `${baseURL}${url}`, data, {headers: headers} );
     console.log('headers', headers);
-    return await fetch(`${baseURL}${url}`, {
-        mode: 'no-cors',
-        headers: headers,
-        method: "POST",
-        body: JSON.stringify(data),
-    });      
+    return await axios.post( `${baseURL}${url}`, data, {headers: headers} );  
 }
 
 async function sendGet( url ) {

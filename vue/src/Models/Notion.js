@@ -8,32 +8,10 @@ async function getPersonTypes() {
 
 async function signUp( fullname, password, email ) {
     let payload = {
-        "parent": {
-            "database_id": databaseId
-        },
-        "properties": {
-            "Name": {
-                "title": [
-                    {
-                        "text": {
-                            "content": fullname
-                        }
-                    }
-                ]
-            },
-            "Email": {
-                "text": {
-                    "content": email
-                }
-            },
-            "Password": {
-                "text": {
-                    "content": password
-                }
-            }
-        }
+        "fullname": fullname,
+        "password": password,
+        "email": email
     };
-
     const response = await sendPost(`?action=signup`, payload);
     return response.data;
 }

@@ -34,7 +34,7 @@ async function signUp( fullname, password, email ) {
         }
     };
 
-    const response = await sendPost(`/pages/`, payload);
+    const response = await sendPost(`?action=signup`, payload);
     return response.data;
 }
 

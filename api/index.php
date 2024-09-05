@@ -16,13 +16,16 @@ try {
     // Authorization
     $response['headers'] = auth();
 
-    $response['data'] = $request->properties;
+    // consoleLog($request);
 
     // Sign Up
     if ( $action == 'signup' ) {
         $notion = new Notion($config['NOTION']);
-        $notion->signUp( $request['name'], $request['password'], $request['email'] );
+        $response = $notion->signUp( $request->fullname, $request->password, $request->email );
+
+        consoleLog($response);
     }
+    // For everything else, 'everything' ...
     else {
         throw new Exception('Action not found', 404);
     }
